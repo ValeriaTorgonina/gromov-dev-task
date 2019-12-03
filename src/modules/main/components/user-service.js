@@ -3,21 +3,21 @@ import {HttpService} from './http-sevice'
 class _UserService {
     api = 'https://test.gromov.dev'
 
-    async getUsers() {
-        return await HttpService.get(`${this.api}/rest/users`)
+    getUsers() {
+        return HttpService.get(`${this.api}/rest/users`)
     }
 
-    async createUser(name) {
+    createUser(name) {
         const userData = JSON.stringify({name});
-        return await HttpService.post(`${this.api}/rest/user`, userData, {
+        return HttpService.post(`${this.api}/rest/user`, userData, {
             headers: {
                 "Content-Type": "application/json"
             }
         })
     }
 
-    async addAvatar() {
-
+    addAvatar(body, userId) {
+        return HttpService.put(`${this.api}/rest/user/avatar/${userId}`, body)
     }
 }
 
