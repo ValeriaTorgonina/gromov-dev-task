@@ -1,10 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import {fonts} from './fonts/index';
+import UserWidget from './modules/main';
 
 class App extends React.Component {
     render () {
-       return 'helloWorld'
+        return <UserWidget/>
     }
 }
 
