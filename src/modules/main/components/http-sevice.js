@@ -1,8 +1,10 @@
 
-class HttpService {
-    request (url, options) {
+class _HttpService {
+    request (url, options) {     
         return fetch(url, options)
-        .then(response => response.ok ? response.json() : response.status)
+        .then(response => {
+            return response.ok ? response.json() : response.status
+        })
     }
 
     get (url, options) {
@@ -24,7 +26,9 @@ class HttpService {
     }
     
     _assignMethod (method, options) {
-        return Object.assign(options, {method})
+        const _options = options || {};
+        return Object.assign(_options, {method})
+        
     }
 
     _assignBodyToOptions (body, options) {
@@ -32,8 +36,9 @@ class HttpService {
         if(body) {
             _options.body = body
         }
+
         return _options
     }
 }
 
-export const httpService = new HttpService()
+export const HttpService = new _HttpService()
