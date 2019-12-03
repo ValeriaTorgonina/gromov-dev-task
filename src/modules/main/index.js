@@ -8,7 +8,8 @@ class UserWidget extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            users: []
+            users: [],
+            loading: false
         }
     }
     addUser(user) {
@@ -25,15 +26,19 @@ class UserWidget extends React.Component {
     }
 
     async addAvatar(file, id) {
-        try {
+        try {            
+            const { users } = this.state;
+            const i = users.findIndex(user => user.id === id);
+            users.splice(i, 1, {...users[i], isLoading: true});
+            this.setState({users});
+
             let fb = new FormData();
             fb.append('file', file);
             fb.append('userId', id);
-            const result = await UserService.addAvatar(fb, id);
-            const newUsers = this.state.users;
-            const deleteIndex = newUsers.findIndex(user => user.id === id)
-            newUsers.splice(deleteIndex, 1, result)
-            this.setState({users: newUsers})
+            const update = await UserService.addAvatar(fb, id);
+
+            users.splice(i, 1, update)
+            this.setState({users})
         }catch(err) {
             console.log(err)
         }
@@ -50,7 +55,8 @@ class UserWidget extends React.Component {
                     <UserForm createUser={(user) => this.addUser(user)}/>
                     <UserTable 
                         usersList={this.state.users}
-                        selectAvatar={(url, id) => this.addAvatar(url, id)}
+                        selectAvatar={(file, id) => this.addAvatar(file, id)}
+                        isLoading={this.state.loading}
                     />
                 </div>
             </div>

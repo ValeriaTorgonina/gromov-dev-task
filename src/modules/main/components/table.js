@@ -1,10 +1,34 @@
 import React from 'react';
+import ProgressBar from './progress-bar';
 
 class UserTable extends React.Component {
-    constructor(props) {
-        super(props)
-        this.state = {
-            url: ''
+
+    renderAvatarSection(avatarUrl, id) {
+        if(!avatarUrl) {
+            return (
+                <div className="input-group mb-3" style={{width: '300px', textAlign: 'start', margin: '0 auto'}}>
+                    <div className="custom-file">
+                        <input 
+                            type="file" 
+                            name='avatarUrl' 
+                            className="custom-file-input" 
+                            id="avatar-upload"
+                            onChange={(e) => this.props.selectAvatar(e.target.files[0], id)}
+                        />
+                        <label className="custom-file-label" htmlFor="avatar-upload">выберите файл</label>
+                    </div>
+                </div>
+            )
+        } else {
+            return (
+                <div style={{
+                    width: '70px', 
+                    height: '50px', 
+                    background: `url(${avatarUrl}) 50% 50% no-repeat`, 
+                    backgroundSize: 'cover', 
+                    margin: '0 auto'
+                }}/>
+            )
         }
     }
 
@@ -20,34 +44,12 @@ class UserTable extends React.Component {
                         </tr>
                     </thead>
                     <tbody>
-                        {this.props.usersList.map(({avatarUrl, id, name}) => {
+                        {this.props.usersList.map(({avatarUrl, id, name, isLoading}) => {
                             return (
                                 <tr key={id}>
                                     <td>{name}</td>
-                                    <td>{id}</td>   
-                                    <td>{!avatarUrl ? 
-                                        (<div className="input-group mb-3" style={{width: '300px', textAlign: 'start', margin: '0 auto'}}>
-                                            <div className="custom-file">
-                                                <input 
-                                                    type="file" 
-                                                    name='avatarUrl' 
-                                                    className="custom-file-input" 
-                                                    id="avatar-upload"
-                                                    onChange={(e) => this.props.selectAvatar(e.target.files[0], id)}
-                                                />
-                                                <label className="custom-file-label" htmlFor="avatar-upload">выберите файл</label>
-                                            </div>
-                                        </div>) :
-                                        (<div style={{
-                                            width: '70px', 
-                                            height: '50px', 
-                                            background: `url(${avatarUrl}) 50% 50% no-repeat`, 
-                                            backgroundSize: 'cover', 
-                                            margin: '0 auto'
-                                        }}> 
-                                        </div>)
-
-                                    }</td>   
+                                    <td>{id}</td> 
+                                    <td>{isLoading ? <ProgressBar/> : this.renderAvatarSection(avatarUrl, id)}</td>   
                                 </tr>
                             )
                         })}
