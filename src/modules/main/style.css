@@ -1,3 +1,15 @@
+/* styles for table */
+
+.table {
+    text-align: center;
+}
+
+.avatar-input {
+    width: 300px;
+    text-align: start;
+    margin: 15px auto;
+}
+
 @keyframes progress {
     0% {
         width: 0;
@@ -23,4 +35,5 @@
 
 .progress-bar {
     animation: progress 1s linear;
+    width: 100%;
 }

@@ -33,7 +33,7 @@ class UserForm extends React.Component {
                     />
                     <button 
                         type="button" 
-                        className="btn btn-secondary mx-auto" 
+                        className="btn btn-secondary mx-auto " 
                         style={{display: 'block'}}
                         onClick={() => this.sendUser()}
                         

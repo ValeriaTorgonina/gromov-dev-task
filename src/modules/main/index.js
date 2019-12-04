@@ -1,8 +1,8 @@
 import React from 'react';
 import UserForm from './components/form';
 import UserTable from './components/table';
-
 import {UserService} from './components/user-service';
+import './style.css';
 
 class UserWidget extends React.Component {
     constructor(props) {

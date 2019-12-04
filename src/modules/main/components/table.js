@@ -6,7 +6,7 @@ class UserTable extends React.Component {
     renderAvatarSection(avatarUrl, id) {
         if(!avatarUrl) {
             return (
-                <div className="input-group mb-3" style={{width: '300px', textAlign: 'start', margin: '0 auto'}}>
+                <div className="input-group mb-3 avatar-input">
                     <div className="custom-file">
                         <input 
                             type="file" 
@@ -35,7 +35,7 @@ class UserTable extends React.Component {
     render() {
         return (
             <div className="col-8 ml-auto">
-                <table className="table table-striped" style={{textAlign: "center"}}>
+                <table className="table table-striped">
                     <thead className="thead-light">
                         <tr>
                             <th scope="col">Имя</th>
