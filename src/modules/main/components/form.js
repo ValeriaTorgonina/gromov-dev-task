@@ -1,5 +1,5 @@
 import React from 'react';
-import {UserService} from './user-service'
+import {UserService} from '../services/user-service'
 
 class UserForm extends React.Component {
     constructor(props) {
@@ -36,7 +36,6 @@ class UserForm extends React.Component {
                         className="btn btn-secondary mx-auto " 
                         style={{display: 'block'}}
                         onClick={() => this.sendUser()}
-                        
                     >
                         Отправить
                     </button>
